@@ -1,7 +1,43 @@
 <html>
-</body>
-   <marquee>
-      <center><h1>hello World</h1></center>
-   </marquee>
+
+<head>
+
+<style>
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1faea;
+}
+table tr:nth-child(even) {
+  background-color: #10ffff;
+}
+</style>
+
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+</head>
+
+<body>
+
+<div ng-app="" ng-controller="customersController"> 
+
+<table>
+  <tr ng-repeat="x in names | orderBy:'Name' ">
+    <td>{{ x.Name }}</td>
+    <td>{{ x.Country | uppercase}}</td>
+  </tr>
+</table>
+
+</div>
+
+<script>
+function customersController($scope,$http) {
+  $http.get("http://www.w3schools.com/website/Customers_JSON.php")
+  .success(function(response) {$scope.names = response;});
+}
+</script>
+
 <body>
 </html>
